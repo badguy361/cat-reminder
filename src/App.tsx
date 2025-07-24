@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
   const [showCat, setShowCat] = useState(false);
-  const [startTime] = useState(Date.now());
+  const startTimeRef = useRef(Date.now()); 
 
   useEffect(() => {
+    const REMINDER_INTERVAL_MS = 1 * 5 * 1000; // 5 秒
+    const CAT_DISPLAY_DURATION_MS = 5 * 1000;
     const interval = setInterval(() => {
-      const now = Date.now();
-      const elapsed = now - startTime;
-
-      if (elapsed > 1 * 1 * 1000) {
+      let now = Date.now();
+      let elapsed = now - startTimeRef.current;  
+      console.log(elapsed);
+      if (elapsed > REMINDER_INTERVAL_MS) {
         setShowCat(true);
-        clearInterval(interval); // 顯示一次就停止
+        setTimeout(() => setShowCat(false), CAT_DISPLAY_DURATION_MS);
+        startTimeRef.current = now;
       }
-    }, 10 * 1000);
+    }, 5 * 1000);
 
     return () => clearInterval(interval);
-  }, [startTime]);
+  }, []);
 
   return (
     <div className="App">
