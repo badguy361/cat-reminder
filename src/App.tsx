@@ -18,7 +18,7 @@ function App() {
         setTimeout(() => setShowCat(false), CAT_DISPLAY_DURATION_MS);
         startTimeRef.current = now;
       }
-    }, 5 * 1000);
+    }, 6 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -46,7 +46,7 @@ function App() {
         <p className="text-gray-600 mb-4">目前進度：{progress}%</p>
         <button
           onClick={handleProgressChange}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
+          className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 custom-bounce"
         >
           更新進度
         </button>
